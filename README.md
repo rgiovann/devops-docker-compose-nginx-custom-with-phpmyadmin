@@ -1,6 +1,7 @@
 # Docker Stack: MySQL + phpMyAdmin with Custom Nginx
 
 This project implements a complete stack for MySQL database administration through a phpMyAdmin web interface, using Docker containers with custom nginx configuration.
+Note: Requires Docker.io and docker-compose to be pre-installed on the system
 
 ## 📋 Project Structure
 
@@ -66,17 +67,8 @@ phpMyAdmin configuration file:
 # Start containers
 docker-compose up --build -d
 
-# Stop containers
-docker-compose down
-
-# View logs
-docker-compose logs -f
-
-# Rebuild only custom container
-docker-compose build phpmyadmin
-
-# Access phpMyAdmin container
-docker exec -it phpmyadmin bash
+# Check containes up and running
+docker ps
 ```
 
 ## 🌐 Access Points
