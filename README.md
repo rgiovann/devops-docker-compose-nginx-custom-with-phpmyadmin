@@ -73,8 +73,8 @@ docker ps
 
 ## 🌐 Access Points
 
-- **phpMyAdmin**: http://<bridge network interface ip>:8080/phpmyadmin/
-- **MySQL Direct**: <bridge network interface ip>:3306 (if direct access needed)
+- **phpMyAdmin**: http://BRIDGE_NET_INTEFACE_IP:8080/phpmyadmin/
+- **MySQL Direct**: BRIDGE_NET_INTEFACE_IP:3306 (for direct database access using MySQL Workbench or similar)
 
 ## 📊 Port Usage
 
