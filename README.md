@@ -67,14 +67,14 @@ phpMyAdmin configuration file:
 # Start containers
 docker-compose up --build -d
 
-# Check containes up and running
+# Check containers up and running
 docker ps
 ```
 
 ## 🌐 Access Points
 
-- **phpMyAdmin**: http://localhost:8080/phpmyadmin/
-- **MySQL Direct**: localhost:3306 (if direct access needed)
+- **phpMyAdmin**: http://<bridge network interface ip>:8080/phpmyadmin/
+- **MySQL Direct**: <bridge network interface ip>:3306 (if direct access needed)
 
 ## 📊 Port Usage
 
