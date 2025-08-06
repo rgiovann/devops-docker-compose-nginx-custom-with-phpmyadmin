@@ -1,8 +1,8 @@
-# Stack Docker: MySQL + phpMyAdmin com Nginx Customizado
+# Docker Stack: MySQL + phpMyAdmin with Custom Nginx
 
-Este projeto implementa uma stack completa para administração de banco de dados MySQL através de uma interface web phpMyAdmin, utilizando containers Docker com nginx customizado.
+This project implements a complete stack for MySQL database administration through a phpMyAdmin web interface, using Docker containers with custom nginx configuration.
 
-## 📋 Estrutura do Projeto
+## 📋 Project Structure
 
 ```
 .
@@ -13,96 +13,96 @@ Este projeto implementa uma stack completa para administração de banco de dado
 └── README.md
 ```
 
-## 🐳 Arquitetura dos Containers
+## 🐳 Container Architecture
 
-- **Container 1**: MySQL 8 (banco de dados)
-- **Container 2**: Nginx + PHP-FPM + phpMyAdmin (interface web)
+- **Container 1**: MySQL 8 (database server)
+- **Container 2**: Nginx + PHP-FPM + phpMyAdmin (web interface)
 
-## 📁 Descrição dos Arquivos
+## 📁 File Description
 
 ### `docker-compose.yml`
-Orquestra os dois serviços da aplicação:
-- **mysql**: Container oficial MySQL 8 com volume persistente
-- **phpmyadmin**: Container customizado baseado no Dockerfile local
-- Define dependências, portas expostas e variáveis de ambiente
+Orchestrates the two application services:
+- **mysql**: Official MySQL 8 container with persistent volume
+- **phpmyadmin**: Custom container based on local Dockerfile
+- Defines dependencies, exposed ports, and environment variables
 
 ### `Dockerfile`
-Constrói container customizado com:
+Builds custom container with:
 - **Base**: Debian 12
 - **Web Server**: Nginx 
-- **PHP**: PHP-FPM 8.2 com driver MySQL
-- **Application**: phpMyAdmin 5.2.1 baixado e configurado automaticamente
-- **Config**: Arquivo de configuração embedded na imagem
+- **PHP**: PHP-FPM 8.2 with MySQL driver
+- **Application**: phpMyAdmin 5.2.1 downloaded and configured automatically
+- **Config**: Configuration file embedded in the image
 
 ### `nginx.conf`
-Configuração do servidor web:
-- Serve arquivos estáticos e processa PHP via socket Unix
-- Define location `/phpmyadmin/` para acesso à aplicação
-- Configurações de segurança básicas (deny .ht files)
-- Processa PHP através do PHP-FPM 8.2
+Web server configuration:
+- Serves static files and processes PHP via Unix socket
+- Defines `/phpmyadmin/` location for application access
+- Basic security configurations (deny .ht files)
+- Processes PHP through PHP-FPM 8.2
 
 ### `config.inc.php`
-Arquivo de configuração do phpMyAdmin:
-- Define conexão com container MySQL via hostname
-- Configura autenticação por cookie
-- Blowfish secret para criptografia de sessão
-- Embedded na imagem durante build (não efêmero)
+phpMyAdmin configuration file:
+- Defines connection to MySQL container via hostname
+- Configures cookie-based authentication
+- Blowfish secret for session encryption
+- Embedded in image during build (not ephemeral)
 
-## 🚀 Como Executar
+## 🚀 How to Run
 
-1. **Clone os arquivos** no diretório desejado
-2. **Execute a stack**:
+1. **Clone the files** to desired directory
+2. **Run the stack**:
    ```bash
    docker-compose up --build -d
    ```
-3. **Acesse phpMyAdmin**: `http://localhost:8080/phpmyadmin/`
-4. **Credenciais MySQL**:
-   - Usuário: `root`
-   - Senha: `root`
+3. **Access phpMyAdmin**: `http://localhost:8080/phpmyadmin/`
+4. **MySQL Credentials**:
+   - Username: `root`
+   - Password: `root`
 
-## 🔧 Comandos Úteis
+## 🔧 Useful Commands
 
 ```bash
-# Subir os containers
+# Start containers
 docker-compose up --build -d
 
-# Parar os containers
+# Stop containers
 docker-compose down
 
-# Ver logs
+# View logs
 docker-compose logs -f
 
-# Rebuild apenas o container customizado
+# Rebuild only custom container
 docker-compose build phpmyadmin
 
-# Acessar container phpMyAdmin
+# Access phpMyAdmin container
 docker exec -it phpmyadmin bash
 ```
 
-## 🌐 Acessos
+## 🌐 Access Points
 
 - **phpMyAdmin**: http://localhost:8080/phpmyadmin/
-- **MySQL Direct**: localhost:3306 (se necessário acesso direto)
+- **MySQL Direct**: localhost:3306 (if direct access needed)
 
-## 📊 Portas Utilizadas
+## 📊 Port Usage
 
-| Serviço | Porta Interna | Porta Externa |
+| Service | Internal Port | External Port |
 |---------|---------------|---------------|
 | MySQL | 3306 | 3306 |
 | Nginx | 80 | 8080 |
 
-## 💾 Persistência de Dados
+## 💾 Data Persistence
 
-- **MySQL**: Volume Docker `mysql-data` para persistir dados do banco
-- **phpMyAdmin Config**: Embedded na imagem (não requer volumes)
+- **MySQL**: Docker volume `mysql-data` to persist database data
+- **phpMyAdmin Config**: Embedded in image (no volumes required)
 
-## 🔒 Configurações de Segurança
+## 🔒 Security Configurations
 
-- Autenticação obrigatória no phpMyAdmin
-- Arquivos .htaccess bloqueados pelo nginx  
-- Comunicação entre containers via rede interna Docker
-- Senha MySQL configurada via environment variable
+- Mandatory authentication in phpMyAdmin
+- .htaccess files blocked by nginx  
+- Inter-container communication via Docker internal network
+- MySQL password configured via environment variable
 
 ---
 
-**Projeto desenvolvido como desafio prático de DevOps - Curso +Devs2Blu**
+**Project developed as a practical DevOps challenge - +Devs2Blu Course**
